@@ -1,0 +1,33 @@
+{% if list is empty %}
+    <h1>Tableau vide</h1>
+{% else %}
+    <table border="1" cellspacing="0" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Title (sliced)</th>
+                <th>Genre</th>
+                <th>Duration</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for theatre in list %}
+                <tr>
+                    <td>{{ theatre.id }}</td>
+                    <td>{{ theatre.Title|upper }}</td>
+                    <td>{{ theatre.Title|slice(1,2) }}</td>
+                    <td>{{ theatre.Genre }}</td>
+                    <td>{{ theatre.Duration }}</td>
+                    <td>
+                        <a href="{{ path('addshow', { id: theatre.id }) }}">Add Show</a>
+                        |
+                        <a href="{{ path('Delete', { id: theatre.id }) }}" 
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette pièce de théâtre ?');">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
